@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;//タップ検知
 
-public class TargetController : MonoBehaviour
+public class TargetController : MonoBehaviour, IPointerDownHandler
 {
     [SerializeField]
     private GameObject burstEffectPrefab;//インスペクターから入れる
@@ -16,7 +17,7 @@ public class TargetController : MonoBehaviour
     }
 
     //マウスがTargetの上で押されたか
-    private void OnMouseDown()
+    public void OnPointerDown(PointerEventData eventData)
     {
         if (gameManager != null)
         {

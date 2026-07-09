@@ -28,9 +28,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] 
     private TargetManager targetManager;//インスペクターから入れる
 
-    //ゲームUIの取得
-    [SerializeField]
-    private RectTransform GaugeFrameRect;
+  
+
+
 
     /// <summary>
     /// ゲーム開始前の初期化を行う
@@ -45,6 +45,14 @@ public class GameManager : MonoBehaviour
             gameUIManager.UpdateScoreText(currentScore);
             gameUIManager.UpdateTimeUI(currentTime, timeLimit);
         }
+
+        //枠の座標を入れる配列
+        Vector3[] gaugeFrameCorners = new Vector3[4];
+        //スコアテキスト用にも
+        Vector3[] scoreCorners = new Vector3[4];
+       
+
+     
     }
 
     /// <summary>
