@@ -25,28 +25,29 @@ public class TargetManager : MonoBehaviour
 
     void Start()
     {
-        //ターゲットマネージャーが誕生した瞬間に、出現範囲を計算
+        // ターゲットマネージャーが誕生した瞬間に、出現範囲を計算する
         if (gaugeRect != null && scoreTextRect != null && Camera.main != null)
         {
+            // ゲージ枠の四隅の画面上の座標を取得する
+            // corners[0]=左下, corners[1]=左上, corners[2]=右上, corners[3]=右下
             Vector3[] gaugeCorners = new Vector3[4];
             gaugeRect.GetWorldCorners(gaugeCorners);
-
+            // スコアテキスト枠の四隅の画面上の座標を取得する
             Vector3[] scoreCorners = new Vector3[4];
             scoreTextRect.GetWorldCorners(scoreCorners);
-
+            // カメラからの奥行き距離を取得する（スクリーン座標→ワールド座標の変換に必要）
             float zDistance = Mathf.Abs(Camera.main.transform.position.z);
-
+            // 画面上の座標を、ゲーム空間の座標（ワールド座標）に変換する
             Vector3 gaugeBottomLeft = Camera.main.ScreenToWorldPoint(new Vector3(gaugeCorners[0].x, gaugeCorners[0].y, zDistance));
             Vector3 gaugeTopRight = Camera.main.ScreenToWorldPoint(new Vector3(gaugeCorners[2].x, gaugeCorners[2].y, zDistance));
             Vector3 scoreBottomLeft = Camera.main.ScreenToWorldPoint(new Vector3(scoreCorners[0].x, scoreCorners[0].y, zDistance));
-
-            float padding = 0.5f;
-
-            // 自分自身の持つ最小値・最大値を上書きする
-            minX = gaugeBottomLeft.x + padding;
-            maxX = gaugeTopRight.x - padding;
-            minY = gaugeBottomLeft.y + padding;
-            maxY = scoreBottomLeft.y - padding;
+            // ターゲットの円がゲージ枠からはみ出さないための余白
+            float padding = 1.0f;
+            // 変換した座標を元に、ターゲットの出現範囲を上書きする
+            minX = gaugeBottomLeft.x + padding; // 左端
+            maxX = gaugeTopRight.x - padding;   // 右端
+            minY = gaugeBottomLeft.y + padding; // 下端
+            maxY = scoreBottomLeft.y - padding; // 上端（スコアテキストの下端に合わせる）
         }
     }
 
