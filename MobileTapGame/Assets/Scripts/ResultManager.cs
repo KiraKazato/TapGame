@@ -7,6 +7,13 @@ public class ResultManager : MonoBehaviour
 {
     [SerializeField]
     private ResultUIManager resultUIManager;//インスペクターから入れる
+    //Sound
+    [SerializeField]
+    private AudioClip buttonSE;//インスペクターから入れる
+    [SerializeField]
+    private AudioSource audioSource;//インスペクターから入れる
+
+    private bool isPressed = false;
 
     /// <summary>
     /// シーン開始時にシステムマネージャーから最終スコアを取得
@@ -27,10 +34,19 @@ public class ResultManager : MonoBehaviour
     /// </summary>
     public void GoToNextScene()
     {
+        //連続押し回避
+        if (isPressed) return;
+
+        if (audioSource != null && buttonSE != null)
+        {
+            //音を鳴らす
+            audioSource.PlayOneShot(buttonSE);
+        }
+
         if (SystemManager.Instance != null)
         {
             //フェードをしながらタイトルに遷移させる
-            SystemManager.Instance.StartFadeAndLoad("Title");
+            SystemManager.Instance.StartFadeAndLoad("Title", 1.0f);
         }
     }
 }

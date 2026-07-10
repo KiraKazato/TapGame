@@ -8,6 +8,8 @@ public class ResultUIManager : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI scoreText;//インスペクターから入れる
 
+
+
     /// <summary>
     /// 点数を入れてもらいtextに表示する関数
     /// </summary>

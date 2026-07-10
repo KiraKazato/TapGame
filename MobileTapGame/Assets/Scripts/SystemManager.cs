@@ -21,7 +21,8 @@ public class SystemManager : MonoBehaviour
     private bool isFadingIn = false;
     private float fadeSpeed = 2.0f;
     private string targetSceneName = "";
-    float alphaValue = 0.0f;
+    private float alphaValue = 0.0f;
+    private float waitTime = 0.0f;
 
     /// <summary>
     /// シングルトンの設定とフェード画像の初期化
@@ -63,9 +64,8 @@ public class SystemManager : MonoBehaviour
             {
                 alphaValue = 1.0f;
                 isFadingOut = false;
-                SceneManager.LoadScene(targetSceneName);
-                // シーン遷移後にフェードインを開始させる
-                isFadingIn = true;
+                //waitTimeの時間待ってシーン遷移
+                Invoke("LoadScene",waitTime);
             }
             //α値の適用
             SetAlpha(alphaValue);
@@ -102,8 +102,9 @@ public class SystemManager : MonoBehaviour
     /// フェードアウトを開始させ、指定したシーンへ遷移する
     /// </summary>
     /// <param name="sceneName">遷移先のシーン名</param>
-    public void StartFadeAndLoad(string sceneName)
+    public void StartFadeAndLoad(string sceneName,float wait)
     {
+        waitTime = wait;
         targetSceneName = sceneName;
         isFadingOut = true;
     }
@@ -115,5 +116,12 @@ public class SystemManager : MonoBehaviour
     public bool IsFading()
     {
         return isFadingOut || isFadingIn;
+    }
+
+    private void LoadScene()
+    {
+        SceneManager.LoadScene(targetSceneName);
+        // シーン遷移後にフェードインを開始させる
+        isFadingIn = true;
     }
 }

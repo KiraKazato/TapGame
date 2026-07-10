@@ -119,7 +119,7 @@ public class GameManager : MonoBehaviour
             if (SystemManager.Instance != null)
             {                 
                 SystemManager.Instance.FinalScore = currentScore;
-                SystemManager.Instance.StartFadeAndLoad("Result");
+                SystemManager.Instance.StartFadeAndLoad("Result", 0.0f);
             }
         }
     }

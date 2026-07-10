@@ -21,6 +21,8 @@ public class TargetManager : MonoBehaviour
     [SerializeField]
     private RectTransform scoreTextRect;//インスペクターから入れる
 
+   
+
     void Start()
     {
         //ターゲットマネージャーが誕生した瞬間に、出現範囲を計算
@@ -63,6 +65,7 @@ public class TargetManager : MonoBehaviour
         {
             //出現させた図形を、設定した時間が経過したら自動的に消去する
             Destroy(spawnedObject, deleteTime);
-        }    
+        }
+
     }
 }

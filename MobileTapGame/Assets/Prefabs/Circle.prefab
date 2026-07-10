@@ -100,6 +100,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   burstEffectPrefab: {fileID: 5596343617236535865, guid: 45f3e5b6190329d48babb645111642de, type: 3}
+  targetScore: 100
+  tapSE: {fileID: 8300000, guid: 675b0dcc53868804ca91b4f75341a446, type: 3}
 --- !u!58 &6720741593509522667
 CircleCollider2D:
   m_ObjectHideFlags: 0
